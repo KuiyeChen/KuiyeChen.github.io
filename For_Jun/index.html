@@ -46,7 +46,14 @@ body {
 
 
 <script>
-
+$(document).ready(function () {
+            if (!sessionStorage.getItem("bgm")) {
+                 $("#bgmvideo").append(
+                    '<audio src="http://music.163.com/song/media/outer/url?id=1299980643.mp3" autoplay hidden></audio>'
+                );
+                sessionStorage.setItem("bgm", 1)
+            }
+        })
 
 // 音量大小,0.01-1
 //宇宙特效
@@ -171,14 +178,7 @@ animation();
 	}
 	typing();
 	
-	$(document).ready(function () {
-            if (!sessionStorage.getItem("bgm")) {
-                 $("#bgmvideo").append(
-                    '<audio src="http://music.163.com/song/media/outer/url?id=1299980643.mp3" autoplay hidden></audio>'
-                );
-                sessionStorage.setItem("bgm", 1)
-            }
-        })
+	
 </script>
 
 </body>
