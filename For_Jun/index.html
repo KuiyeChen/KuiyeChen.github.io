@@ -39,8 +39,8 @@ body {
 
 </head>
 <body>
-<audio autoplay="autopaly" loop="loop" controls="controls" id="audios">
-    <source src="http://music.163.com/song/media/outer/url?id=1299980643.mp3" type="audio/mp3" />
+<audio loop id="media" autoplay preload>
+  <source :src="audioSrc">
 </audio>
 <canvas id="canvas"></canvas>
 <div id="divTyping" style="color:white;font-size:50px;"></div>
@@ -171,6 +171,25 @@ animation();
 		}
 	}
 	typing();
+	
+	data() {
+    return {
+      audioSrc: require('http://music.163.com/song/media/outer/url?id=1299980643.mp3'),
+    };
+  },
+mounted() {
+    wx.ready(function() {
+      document.getElementById("media").play();
+      document.getElementById("media").volume = 0.8;
+    });
+    document.addEventListener(
+      "WeixinJSBridgeReady",
+      function() {
+        document.getElementById("media").play();
+      },
+      false
+    );
+  }
 </script>
 
 </body>
