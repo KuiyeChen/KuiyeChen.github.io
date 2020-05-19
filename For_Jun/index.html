@@ -39,9 +39,8 @@ body {
 
 </head>
 <body>
-<audio loop id="media" autoplay preload>
-  <source :src="audioSrc">
-</audio>
+
+<div id="bgmvideo"></div>
 <canvas id="canvas"></canvas>
 <div id="divTyping" style="color:white;font-size:50px;"></div>
 
@@ -172,24 +171,14 @@ animation();
 	}
 	typing();
 	
-	data() {
-    return {
-      audioSrc: require('http://music.163.com/song/media/outer/url?id=1299980643.mp3'),
-    };
-  },
-mounted() {
-    wx.ready(function() {
-      document.getElementById("media").play();
-      document.getElementById("media").volume = 0.8;
-    });
-    document.addEventListener(
-      "WeixinJSBridgeReady",
-      function() {
-        document.getElementById("media").play();
-      },
-      false
-    );
-  }
+	$(document).ready(function () {
+            if (!sessionStorage.getItem("bgm")) {
+                 $("#bgmvideo").append(
+                    '<audio src="http://music.163.com/song/media/outer/url?id=1299980643.mp3" autoplay hidden></audio>'
+                );
+                sessionStorage.setItem("bgm", 1)
+            }
+        })
 </script>
 
 </body>
